@@ -1,12 +1,27 @@
 #include "main.h"
 
 int main(int argc, char* argv[]) {
-  daa::MdpProblem problem{daa::ReadInfoFromFile("examples/max_div_15_2.txt")};
+  daa::MdpProblem problem{daa::ReadInfoFromFile("examples/max_div_30_3.txt")};
 
   daa::MdpSolver solver{};
   solver.SetAlgorithm(daa::MdpSolver::AlgorithmTypes::kGreedy);
-  daa::MdpSolution greedy_solution{solver.Solve(problem, 3)};
-  std::cout << greedy_solution;
+  auto greedy_start_time = std::chrono::steady_clock::now();
+  daa::MdpSolution greedy_solution{solver.Solve(problem, 10, nullptr)};
+  auto greedy_actual_time = std::chrono::steady_clock::now();
+  auto greedy_execution_time =
+      std::chrono::duration_cast<std::chrono::milliseconds>(greedy_actual_time -
+                                                            greedy_start_time);
+  std::cout << "Without Exchange:\n" << greedy_solution;
+  std::cout << greedy_execution_time.count() << "ms\n\n";
+
+  greedy_start_time = std::chrono::steady_clock::now();
+  daa::MdpSolution greedy_solution_exchange{
+      solver.Solve(problem, 10, new daa::MdpExchange)};
+  greedy_actual_time = std::chrono::steady_clock::now();
+  greedy_execution_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+      greedy_actual_time - greedy_start_time);
+  std::cout << "With Exchange:\n" << greedy_solution_exchange;
+  std::cout << greedy_execution_time.count() << "ms\n";
 
   return EXIT_SUCCESS;
 }

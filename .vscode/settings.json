@@ -42,6 +42,8 @@
     "fstream": "cpp",
     "string": "cpp",
     "algorithm": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "iterator": "cpp",
+    "chrono": "cpp"
   }
 }

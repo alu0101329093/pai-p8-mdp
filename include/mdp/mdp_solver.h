@@ -5,6 +5,7 @@
 
 #include "mdp/mdp_algorithm.h"
 #include "mdp/mdp_greedy.h"
+#include "mdp/mdp_local_search.h"
 #include "mdp/mdp_problem.h"
 #include "mdp/mdp_solution.h"
 
@@ -16,7 +17,8 @@ class MdpSolver {
 
   MdpSolver();
 
-  MdpSolution Solve(const MdpProblem& problem, std::size_t subset_max_elements);
+  MdpSolution Solve(const MdpProblem& problem, std::size_t subset_max_elements,
+                    MdpLocalSearch* local_search);
 
   void SetAlgorithm(AlgorithmTypes type);
 

@@ -1,7 +1,9 @@
 #ifndef P8MDP_MDP_MDP_SOLUTION_H_
 #define P8MDP_MDP_MDP_SOLUTION_H_
 
+#include <cmath>
 #include <iostream>
+#include <iterator>
 #include <set>
 #include <vector>
 
@@ -18,6 +20,11 @@ class MdpSolution {
     elements_set_ = elements_set;
   }
   inline std::size_t GetElementsAmount() const { return elements_amount_; }
+  inline void SetElementsAmount(std::size_t amount) {
+    elements_amount_ = amount;
+  }
+
+  float GetDiversity() const;
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const MdpSolution& solution) {
@@ -30,11 +37,15 @@ class MdpSolution {
         std::cout << element[i] << (i == element.size() - 1 ? "\n" : ", ");
       }
     }
+    os << "Diversity: " << solution.GetDiversity() << "\n";
 
     return os;
   }
 
  private:
+  float GetDistance(const std::vector<float>& first_element,
+                    const std::vector<float>& second_element) const;
+
   ElementsSet elements_set_;
   std::size_t elements_amount_;
 };

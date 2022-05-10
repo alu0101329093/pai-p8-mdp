@@ -5,20 +5,27 @@ namespace daa {
 MdpGreedy::MdpGreedy() {}
 
 MdpSolution MdpGreedy::Solve(const MdpProblem& problem,
-                             std::size_t subset_max_elements) {
+                             std::size_t subset_max_elements,
+                             MdpLocalSearch* local_search) {
   ElementsSet current_elements = problem.GetElementsSet();
   ElementsSet solution_set{};
   std::vector<float> center{GetCenter(current_elements)};
+  std::unique_ptr<MdpLocalSearch> local_search_ptr{local_search};
+  subset_max_elements =
+      std::min(subset_max_elements, problem.GetElementsAmount() - 1);
 
   while (solution_set.size() < subset_max_elements) {
     std::vector<float> most_away_element{
         GetMostAwayElement(center, current_elements)};
     solution_set.insert(most_away_element);
     current_elements.erase(most_away_element);
-    center = GetCenter(current_elements);
+    center = GetCenter(solution_set);
   }
 
-  return MdpSolution{solution_set, subset_max_elements};
+  MdpSolution solution{solution_set, subset_max_elements};
+  if (local_search_ptr)
+    return local_search_ptr->Execute(solution, current_elements);
+  return solution;
 }
 
 std::vector<float> MdpGreedy::GetCenter(const ElementsSet& elements_set) const {
@@ -36,10 +43,9 @@ std::vector<float> MdpGreedy::GetCenter(const ElementsSet& elements_set) const {
   return center_dimensions;
 }
 
-std::size_t MdpGreedy::GetDistance(
-    const std::vector<float>& first_element,
-    const std::vector<float>& second_element) const {
-  std::size_t squared_distance{};
+float MdpGreedy::GetDistance(const std::vector<float>& first_element,
+                             const std::vector<float>& second_element) const {
+  float squared_distance{};
   for (std::size_t i = 0; i < first_element.size(); ++i) {
     squared_distance += (first_element[i] - second_element[i]) *
                         (first_element[i] - second_element[i]);
@@ -50,10 +56,10 @@ std::size_t MdpGreedy::GetDistance(
 std::vector<float> MdpGreedy::GetMostAwayElement(
     const std::vector<float>& center, const ElementsSet& elements_set) const {
   std::vector<float> most_away_element{};
-  std::size_t best_distance{};
+  float best_distance{};
 
   for (const auto& element : elements_set) {
-    std::size_t new_distance{GetDistance(center, element)};
+    float new_distance{GetDistance(center, element)};
     if (new_distance > best_distance) {
       best_distance = new_distance;
       most_away_element = element;
