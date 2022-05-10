@@ -11,4 +11,14 @@ MdpSolution MdpSolver::Solve(const MdpProblem& problem,
   }
 }
 
+void MdpSolver::SetAlgorithm(AlgorithmTypes type) {
+  switch (type) {
+    case AlgorithmTypes::kGreedy:
+      algorithm_.reset(new MdpGreedy{});
+      break;
+    default:
+      break;
+  }
+}
+
 }  // namespace daa
