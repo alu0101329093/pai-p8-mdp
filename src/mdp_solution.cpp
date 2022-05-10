@@ -25,6 +25,13 @@ float MdpSolution::GetDiversity() const {
   return diversity;
 }
 
+/**
+ * @brief Get the distance between two elements
+ *
+ * @param first_element
+ * @param second_element
+ * @return float
+ */
 float MdpSolution::GetDistance(const std::vector<float>& first_element,
                                const std::vector<float>& second_element) const {
   float squared_distance{};

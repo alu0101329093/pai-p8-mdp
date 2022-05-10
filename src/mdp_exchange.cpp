@@ -2,8 +2,18 @@
 
 namespace daa {
 
+/**
+ * @brief Construct a new Mdp Exchange:: Mdp Exchange object
+ */
 MdpExchange::MdpExchange() {}
 
+/**
+ * @brief Execute the local searchh of exchange
+ *
+ * @param solution
+ * @param unused_elements
+ * @return MdpSolution
+ */
 MdpSolution MdpExchange::Execute(const MdpSolution& solution,
                                  const ElementsSet& unused_elements) {
   float solution_diversity{solution.GetDiversity()};
@@ -33,6 +43,13 @@ MdpSolution MdpExchange::Execute(const MdpSolution& solution,
   return MdpSolution{elements_set, solution.GetElementsAmount()};
 }
 
+/**
+ * @brief Get the distance between two elements
+ *
+ * @param first_element
+ * @param second_element
+ * @return float
+ */
 float MdpExchange::GetDistance(const std::vector<float>& first_element,
                                const std::vector<float>& second_element) const {
   float squared_distance{};
@@ -43,6 +60,14 @@ float MdpExchange::GetDistance(const std::vector<float>& first_element,
   return std::sqrt(squared_distance);
 }
 
+/**
+ * @brief Get the diversity with the remove of a element
+ *
+ * @param element_to_remove
+ * @param elements_set
+ * @param solution_diversity
+ * @return float
+ */
 float MdpExchange::GetElementRemoveDiversity(
     const std::vector<float>& element_to_remove,
     const ElementsSet& elements_set, float solution_diversity) const {
@@ -56,6 +81,15 @@ float MdpExchange::GetElementRemoveDiversity(
   return remove_diversity;
 }
 
+/**
+ * @brief Get the diversity with the addition of a element
+ *
+ * @param element_to_add
+ * @param removed_element
+ * @param elements_set
+ * @param remove_diversity
+ * @return float
+ */
 float MdpExchange::GetElementAddDiversity(
     const std::vector<float>& element_to_add,
     const std::vector<float>& removed_element, const ElementsSet& elements_set,

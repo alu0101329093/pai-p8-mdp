@@ -44,6 +44,7 @@
     "algorithm": "cpp",
     "sstream": "cpp",
     "iterator": "cpp",
-    "chrono": "cpp"
+    "chrono": "cpp",
+    "ratio": "cpp"
   }
 }

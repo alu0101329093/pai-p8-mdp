@@ -2,8 +2,20 @@
 
 namespace daa {
 
+/**
+ * @brief Construct a new Mdp Greedy:: Mdp Greedy object
+ *
+ */
 MdpGreedy::MdpGreedy() {}
 
+/**
+ * @brief Solve the greedy algorithm
+ *
+ * @param problem
+ * @param subset_max_elements
+ * @param local_search
+ * @return MdpSolution
+ */
 MdpSolution MdpGreedy::Solve(const MdpProblem& problem,
                              std::size_t subset_max_elements,
                              MdpLocalSearch* local_search) {
@@ -28,6 +40,12 @@ MdpSolution MdpGreedy::Solve(const MdpProblem& problem,
   return solution;
 }
 
+/**
+ * @brief Get the center of a set of elements
+ *
+ * @param elements_set
+ * @return std::vector<float>
+ */
 std::vector<float> MdpGreedy::GetCenter(const ElementsSet& elements_set) const {
   std::vector<float> center_dimensions{0, 0, 0};
 
@@ -43,6 +61,13 @@ std::vector<float> MdpGreedy::GetCenter(const ElementsSet& elements_set) const {
   return center_dimensions;
 }
 
+/**
+ * @brief Get the distance between two elements
+ *
+ * @param first_element
+ * @param second_element
+ * @return float
+ */
 float MdpGreedy::GetDistance(const std::vector<float>& first_element,
                              const std::vector<float>& second_element) const {
   float squared_distance{};
@@ -53,6 +78,13 @@ float MdpGreedy::GetDistance(const std::vector<float>& first_element,
   return std::sqrt(squared_distance);
 }
 
+/**
+ * @brief Get the most away element in a set of elements
+ *
+ * @param center
+ * @param elements_set
+ * @return std::vector<float>
+ */
 std::vector<float> MdpGreedy::GetMostAwayElement(
     const std::vector<float>& center, const ElementsSet& elements_set) const {
   std::vector<float> most_away_element{};
