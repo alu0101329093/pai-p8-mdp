@@ -11,7 +11,7 @@ namespace daa {
 class MdpAlgorithm {
  public:
   virtual MdpSolution Solve(const MdpProblem& problem,
-                            std::size_t subset_max_elements);
+                            std::size_t subset_max_elements) = 0;
 };
 
 }  // namespace daa
