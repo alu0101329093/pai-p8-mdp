@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "mdp/mdp_algorithm.h"
+#include "mdp/mdp_greedy.h"
 #include "mdp/mdp_problem.h"
 #include "mdp/mdp_solution.h"
 
