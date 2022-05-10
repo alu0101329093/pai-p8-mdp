@@ -1,7 +1,5 @@
 #include "mdp/mdp_greedy.h"
 
-#include <iostream>
-
 namespace daa {
 
 MdpGreedy::MdpGreedy() {}
@@ -31,11 +29,9 @@ std::vector<float> MdpGreedy::GetCenter(const ElementsSet& elements_set) const {
       center_dimensions[i] += element[i];
     }
   }
-  std::cout << center_dimensions[0] << std::endl;
-  for (auto dimension : center_dimensions) {
+  for (auto& dimension : center_dimensions) {
     dimension /= elements_set.size();
   }
-  std::cout << center_dimensions[0] << std::endl;
 
   return center_dimensions;
 }
@@ -51,9 +47,9 @@ std::size_t MdpGreedy::GetDistance(
   return std::sqrt(squared_distance);
 }
 
-const std::vector<float>& MdpGreedy::GetMostAwayElement(
+std::vector<float> MdpGreedy::GetMostAwayElement(
     const std::vector<float>& center, const ElementsSet& elements_set) const {
-  std::vector<float> most_away_element{0, 0, 0};
+  std::vector<float> most_away_element{};
   std::size_t best_distance{};
 
   for (const auto& element : elements_set) {

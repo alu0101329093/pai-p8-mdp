@@ -22,8 +22,8 @@ class MdpGreedy : public MdpAlgorithm {
   std::vector<float> GetCenter(const ElementsSet& elements_set) const;
   std::size_t GetDistance(const std::vector<float>& first_element,
                           const std::vector<float>& second_element) const;
-  const std::vector<float>& GetMostAwayElement(
-      const std::vector<float>& center, const ElementsSet& elements_set) const;
+  std::vector<float> GetMostAwayElement(const std::vector<float>& center,
+                                        const ElementsSet& elements_set) const;
 };
 
 }  // namespace daa
