@@ -12,15 +12,13 @@ MdpSolver::MdpSolver() : algorithm_{} {}
  * @brief Solve the problem using the selected algorithm
  *
  * @param problem
- * @param subset_max_elements
- * @param local_search
+ * @param options
  * @return MdpSolution
  */
 MdpSolution MdpSolver::Solve(const MdpProblem& problem,
-                             std::size_t subset_max_elements,
-                             MdpLocalSearch* local_search) {
+                             const std::unique_ptr<MdpOptions>& options) {
   if (algorithm_) {
-    return algorithm_->Solve(problem, subset_max_elements, local_search);
+    return algorithm_->Solve(problem, options);
   }
 }
 

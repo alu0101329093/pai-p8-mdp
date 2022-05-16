@@ -12,19 +12,16 @@ MdpGreedy::MdpGreedy() {}
  * @brief Solve the greedy algorithm
  *
  * @param problem
- * @param subset_max_elements
- * @param local_search
+ * @param options
  * @return MdpSolution
  */
 MdpSolution MdpGreedy::Solve(const MdpProblem& problem,
-                             std::size_t subset_max_elements,
-                             MdpLocalSearch* local_search) {
+                             const std::unique_ptr<MdpOptions>& options) {
   ElementsSet current_elements = problem.GetElementsSet();
   ElementsSet solution_set{};
   std::vector<float> center{GetCenter(current_elements)};
-  std::unique_ptr<MdpLocalSearch> local_search_ptr{local_search};
-  subset_max_elements =
-      std::min(subset_max_elements, problem.GetElementsAmount() - 1);
+  std::size_t subset_max_elements = std::min(options->GetSubsetMaxElements(),
+                                             problem.GetElementsAmount() - 1);
 
   while (solution_set.size() < subset_max_elements) {
     std::vector<float> most_away_element{
@@ -35,8 +32,8 @@ MdpSolution MdpGreedy::Solve(const MdpProblem& problem,
   }
 
   MdpSolution solution{solution_set, subset_max_elements};
-  if (local_search_ptr)
-    return local_search_ptr->Execute(solution, current_elements);
+  if (options->GetLocalSearch())
+    return options->GetLocalSearch()->Execute(solution, current_elements);
   return solution;
 }
 

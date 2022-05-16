@@ -9,6 +9,7 @@
 
 #include "mdp/mdp_algorithm.h"
 #include "mdp/mdp_local_search.h"
+#include "mdp/mdp_options.h"
 #include "mdp/mdp_problem.h"
 #include "mdp/mdp_solution.h"
 
@@ -19,8 +20,8 @@ class MdpGreedy : public MdpAlgorithm {
   MdpGreedy();
 
   virtual MdpSolution Solve(const MdpProblem& problem,
-                            std::size_t subset_max_elements,
-                            MdpLocalSearch* local_search) override;
+                            const std::unique_ptr<MdpOptions>& options =
+                                std::unique_ptr<MdpOptions>{}) override;
 
  private:
   std::vector<float> GetCenter(const ElementsSet& elements_set) const;
