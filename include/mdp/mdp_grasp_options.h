@@ -12,7 +12,7 @@ class MdpGraspOptions : public MdpOptions {
   MdpGraspOptions(std::size_t subset_max_elements, MdpLocalSearch* local_search,
                   std::size_t iterations, std::size_t random_solutions_amount,
                   std::size_t max_unchanged_iterations);
-  virtual ~MdpGraspOptions() override;
+  // virtual ~MdpGraspOptions() override;
 
   inline std::size_t GetIterations() const { return iterations_; }
   inline void SetIterations(std::size_t iterations) {

@@ -11,7 +11,7 @@ namespace daa {
 class MdpOptions {
  public:
   MdpOptions(std::size_t subset_max_elements, MdpLocalSearch* local_search);
-  virtual ~MdpOptions() = 0;
+  // virtual ~MdpOptions() = 0;
 
   inline std::size_t GetSubsetMaxElements() const {
     return subset_max_elements_;

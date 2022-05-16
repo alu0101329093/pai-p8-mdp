@@ -2,6 +2,15 @@
 
 namespace daa {
 
+/**
+ * @brief Construct a new Mdp Grasp Options:: Mdp Grasp Options object
+ * 
+ * @param subset_max_elements 
+ * @param local_search 
+ * @param iterations 
+ * @param random_solutions_amount 
+ * @param max_unchanged_iterations 
+ */
 MdpGraspOptions::MdpGraspOptions(std::size_t subset_max_elements,
                                  MdpLocalSearch* local_search,
                                  std::size_t iterations,
@@ -12,6 +21,6 @@ MdpGraspOptions::MdpGraspOptions(std::size_t subset_max_elements,
       random_solutions_amount_{random_solutions_amount},
       max_unchanged_iterations_{max_unchanged_iterations} {}
 
-MdpGraspOptions::~MdpGraspOptions() {}
+// MdpGraspOptions::~MdpGraspOptions() {}
 
 }  // namespace daa
