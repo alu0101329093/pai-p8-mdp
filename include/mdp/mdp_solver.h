@@ -8,6 +8,7 @@
 #include "mdp/mdp_options.h"
 #include "mdp/mdp_problem.h"
 #include "mdp/mdp_solution.h"
+#include "mdp/mdp_grasp.h"
 
 namespace daa {
 

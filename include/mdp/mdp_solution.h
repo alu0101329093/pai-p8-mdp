@@ -13,7 +13,8 @@ typedef std::set<std::vector<float>> ElementsSet;
 
 class MdpSolution {
  public:
-  MdpSolution(const ElementsSet& elements_set, std::size_t elements_amount);
+  MdpSolution(const ElementsSet& elements_set = {},
+              std::size_t elements_amount = 0);
 
   inline const ElementsSet& GetElementsSet() const { return elements_set_; }
   inline void SetElementsSet(const ElementsSet& elements_set) {

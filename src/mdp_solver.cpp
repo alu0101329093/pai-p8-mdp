@@ -32,6 +32,9 @@ void MdpSolver::SetAlgorithm(AlgorithmTypes type) {
     case AlgorithmTypes::kGreedy:
       algorithm_.reset(new MdpGreedy{});
       break;
+    case AlgorithmTypes::kGrasp:
+      algorithm_.reset(new MdpGrasp());
+      break;
     default:
       break;
   }
