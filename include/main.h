@@ -5,10 +5,13 @@
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 
 #include "mdp/mdp_exchange.h"
+#include "mdp/mdp_grasp_options.h"
+#include "mdp/mdp_options.h"
 #include "mdp/mdp_problem.h"
 #include "mdp/mdp_solution.h"
 #include "mdp/mdp_solver.h"

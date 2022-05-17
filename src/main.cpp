@@ -1,12 +1,13 @@
 #include "main.h"
 
 int main(int argc, char* argv[]) {
-  daa::MdpProblem problem{daa::ReadInfoFromFile("examples/max_div_30_3.txt")};
+  daa::MdpProblem problem{daa::ReadInfoFromFile("examples/max_div_15_2.txt")};
 
   daa::MdpSolver solver{};
   solver.SetAlgorithm(daa::MdpSolver::AlgorithmTypes::kGreedy);
   auto greedy_start_time = std::chrono::steady_clock::now();
-  daa::MdpSolution greedy_solution{solver.Solve(problem, 10, nullptr)};
+  daa::MdpSolution greedy_solution{
+      solver.Solve(problem, std::make_unique<daa::MdpOptions>(5, nullptr))};
   auto greedy_actual_time = std::chrono::steady_clock::now();
   auto greedy_execution_time =
       std::chrono::duration_cast<std::chrono::milliseconds>(greedy_actual_time -
@@ -15,13 +16,25 @@ int main(int argc, char* argv[]) {
   std::cout << greedy_execution_time.count() << "ms\n\n";
 
   greedy_start_time = std::chrono::steady_clock::now();
-  daa::MdpSolution greedy_solution_exchange{
-      solver.Solve(problem, 10, new daa::MdpExchange)};
+  daa::MdpSolution greedy_solution_exchange{solver.Solve(
+      problem, std::make_unique<daa::MdpOptions>(5, new daa::MdpExchange))};
   greedy_actual_time = std::chrono::steady_clock::now();
   greedy_execution_time = std::chrono::duration_cast<std::chrono::milliseconds>(
       greedy_actual_time - greedy_start_time);
   std::cout << "With Exchange:\n" << greedy_solution_exchange;
   std::cout << greedy_execution_time.count() << "ms\n";
+
+  solver.SetAlgorithm(daa::MdpSolver::AlgorithmTypes::kGrasp);
+  auto grasp_start_time = std::chrono::steady_clock::now();
+  daa::MdpSolution grasp_solution_exchange{
+      solver.Solve(problem, std::make_unique<daa::MdpGraspOptions>(
+                                5, new daa::MdpExchange, 1000, 5, 100))};
+  auto grasp_actual_time = std::chrono::steady_clock::now();
+  auto grasp_execution_time =
+      std::chrono::duration_cast<std::chrono::milliseconds>(grasp_actual_time -
+                                                            grasp_start_time);
+  std::cout << "Grasp With Exchange:\n" << grasp_solution_exchange;
+  std::cout << grasp_execution_time.count() << "ms\n";
 
   return EXIT_SUCCESS;
 }
