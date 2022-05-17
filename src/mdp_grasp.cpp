@@ -28,6 +28,7 @@ MdpSolution MdpGrasp::Solve(const MdpProblem& problem,
     if (solution_diversity > best_solution_diversity) {
       best_solution.SetElementsSet(solution.GetElementsSet());
       best_solution.SetElementsAmount(solution.GetElementsAmount());
+      best_solution_diversity = solution_diversity;
       unchanged_iterations = 0;
     } else {
       ++unchanged_iterations;
