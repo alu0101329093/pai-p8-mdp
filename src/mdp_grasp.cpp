@@ -166,7 +166,10 @@ MdpGrasp::ConstructionSolution MdpGrasp::SolvePartialSolution(
 MdpSolution MdpGrasp::PostProcessing(const MdpSolution& solution,
                                      MdpGraspOptions* options,
                                      const ElementsSet& unused_elements) const {
-  return options->GetLocalSearch()->Execute(solution, unused_elements);
+  if (options->GetLocalSearch())
+    return options->GetLocalSearch()->Execute(solution, unused_elements);
+  else
+    solution;
 }
 
 }  // namespace daa
