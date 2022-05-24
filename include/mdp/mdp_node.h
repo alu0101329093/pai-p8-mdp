@@ -19,11 +19,23 @@ class MdpNode {
 
   inline float GetDiversity() const { return diversity_; }
 
+  inline float GetUpperBound() const { return upper_bound_; }
+  inline void SetUpperBound(float upper_bound) { upper_bound_ = upper_bound; }
+
+  friend bool operator<(const MdpNode& first_node, const MdpNode& second_node) {
+    return first_node.diversity_ < second_node.diversity_;
+  }
+
+  friend bool operator>(const MdpNode& first_node, const MdpNode& second_node) {
+    return first_node.diversity_ > second_node.diversity_;
+  }
+
  private:
   void CalculateDiversity();
 
   ElementsSet branch_;
   float diversity_;
+  float upper_bound_;
 };
 
 }  // namespace daa
