@@ -3,7 +3,7 @@
 namespace daa {
 
 MdpNode::MdpNode(const ElementsSet& element_branch, std::vector<float> element)
-    : branch_{element_branch}, diversity_{} {
+    : branch_{element_branch}, diversity_{}, upper_bound_{} {
   branch_.insert(element);
   CalculateDiversity();
 }
