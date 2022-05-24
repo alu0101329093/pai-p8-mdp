@@ -2,8 +2,12 @@
 
 namespace daa {
 
-MdpNode::MdpNode(const ElementsSet& element_branch, std::vector<float> element)
-    : branch_{element_branch}, diversity_{}, upper_bound_{} {
+MdpNode::MdpNode(const ElementsSet& element_branch, std::vector<float> element,
+                 ComparisonType comparison)
+    : branch_{element_branch},
+      diversity_{},
+      upper_bound_{},
+      comparison_{comparison} {
   branch_.insert(element);
   CalculateDiversity();
 }
