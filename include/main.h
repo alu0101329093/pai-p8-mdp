@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -22,6 +23,14 @@
 namespace daa {
 
 MdpProblem ReadInfoFromFile(const std::string& file_name);
+
+void ShowGreedyOutput(const std::string& path);
+void ShowGreedyExchangeOutput(const std::string& path);
+void ShowGraspOutput(const std::string& path);
+void ShowBBLessGreedyOutput(const std::string& path);
+void ShowBBLessGraspOutput(const std::string& path);
+void ShowBBDeepGreedyOutput(const std::string& path);
+void ShowBBDeepGraspOutput(const std::string& path);
 
 }  // namespace daa
 
