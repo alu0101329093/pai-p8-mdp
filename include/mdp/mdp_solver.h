@@ -4,17 +4,18 @@
 #include <memory>
 
 #include "mdp/mdp_algorithm.h"
+#include "mdp/mdp_branch_bound.h"
+#include "mdp/mdp_grasp.h"
 #include "mdp/mdp_greedy.h"
 #include "mdp/mdp_options.h"
 #include "mdp/mdp_problem.h"
 #include "mdp/mdp_solution.h"
-#include "mdp/mdp_grasp.h"
 
 namespace daa {
 
 class MdpSolver {
  public:
-  enum class AlgorithmTypes { kGreedy, kGrasp };
+  enum class AlgorithmTypes { kGreedy, kGrasp, kBranchBound };
 
   MdpSolver();
 

@@ -4,9 +4,9 @@
 #include <cstdlib>
 #include <memory>
 
+#include "mdp/mdp_algorithm.h"
 #include "mdp/mdp_node.h"
 #include "mdp/mdp_options.h"
-#include "mdp/mdp_solver.h"
 
 namespace daa {
 
@@ -14,14 +14,14 @@ class MdpBranchBoundOptions : public MdpOptions {
  public:
   MdpBranchBoundOptions(std::size_t subset_max_elements,
                         MdpLocalSearch* local_search,
-                        MdpSolver* heuristic_function,
+                        MdpAlgorithm* heuristic_function,
                         MdpNode::ComparisonType comparison);
   // virtual ~MdpBranchBoundOptions() override;
 
-  inline const std::unique_ptr<MdpSolver>& GetHeuristicFuntion() const {
+  inline const std::unique_ptr<MdpAlgorithm>& GetHeuristicFuntion() const {
     return heuristic_function_;
   }
-  inline void SetHeuristicFunction(MdpSolver* function) {
+  inline void SetHeuristicFunction(MdpAlgorithm* function) {
     heuristic_function_.reset(function);
   }
 
@@ -31,7 +31,7 @@ class MdpBranchBoundOptions : public MdpOptions {
   }
 
  private:
-  std::unique_ptr<MdpSolver> heuristic_function_;
+  std::unique_ptr<MdpAlgorithm> heuristic_function_;
   MdpNode::ComparisonType comparison_;
 };
 

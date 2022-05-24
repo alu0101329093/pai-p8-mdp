@@ -35,6 +35,8 @@ void MdpSolver::SetAlgorithm(AlgorithmTypes type) {
     case AlgorithmTypes::kGrasp:
       algorithm_.reset(new MdpGrasp());
       break;
+    case AlgorithmTypes::kBranchBound:
+      algorithm_.reset(new MdpBranchBound());
     default:
       break;
   }

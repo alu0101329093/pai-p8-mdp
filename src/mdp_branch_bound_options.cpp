@@ -13,7 +13,7 @@ namespace daa {
  */
 MdpBranchBoundOptions::MdpBranchBoundOptions(std::size_t subset_max_elements,
                                              MdpLocalSearch* local_search,
-                                             MdpSolver* heuristic_function,
+                                             MdpAlgorithm* heuristic_function,
                                              MdpNode::ComparisonType comparison)
     : MdpOptions{subset_max_elements, local_search},
       heuristic_function_{heuristic_function},

@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
   greedy_execution_time = std::chrono::duration_cast<std::chrono::milliseconds>(
       greedy_actual_time - greedy_start_time);
   std::cout << "With Exchange:\n" << greedy_solution_exchange;
-  std::cout << greedy_execution_time.count() << "ms\n";
+  std::cout << greedy_execution_time.count() << "ms\n\n";
 
   solver.SetAlgorithm(daa::MdpSolver::AlgorithmTypes::kGrasp);
   auto grasp_start_time = std::chrono::steady_clock::now();
@@ -35,6 +35,19 @@ int main(int argc, char* argv[]) {
                                                             grasp_start_time);
   std::cout << "Grasp With Exchange:\n" << grasp_solution_exchange;
   std::cout << grasp_execution_time.count() << "ms\n";
+
+  solver.SetAlgorithm(daa::MdpSolver::AlgorithmTypes::kBranchBound);
+  auto bb_start_time = std::chrono::steady_clock::now();
+  daa::MdpSolution bb_solution_exchange{solver.Solve(
+      problem, std::make_unique<daa::MdpBranchBoundOptions>(
+                   5, new daa::MdpExchange, new daa::MdpGreedy,
+                   daa::MdpNode::ComparisonType::kLessUpperBound))};
+  auto bb_actual_time = std::chrono::steady_clock::now();
+  auto bb_execution_time =
+      std::chrono::duration_cast<std::chrono::milliseconds>(bb_actual_time -
+                                                            bb_start_time);
+  std::cout << "BB With Exchange:\n" << bb_solution_exchange;
+  std::cout << bb_execution_time.count() << "ms\n";
 
   return EXIT_SUCCESS;
 }

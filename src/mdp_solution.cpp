@@ -14,6 +14,7 @@ MdpSolution::MdpSolution(const ElementsSet& elements_set,
 
 float MdpSolution::GetDiversity() const {
   float diversity{};
+  if (elements_set_.size() < 1) return diversity;
 
   auto last_iterator = std::prev(elements_set_.end());
   for (auto i = elements_set_.begin(); i != last_iterator; ++i) {
